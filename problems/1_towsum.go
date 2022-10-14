@@ -1,4 +1,4 @@
-package main
+package problem
 
 func twoSum(numbers []int, target int) []int {
 	for index, num := range numbers {
