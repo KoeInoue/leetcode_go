@@ -1,10 +1,5 @@
 package problem
 
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
 func AddTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	// We'll use l1 to write the results in, so we need to store the head
 	carry, head := 0, l1
