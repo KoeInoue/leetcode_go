@@ -1,6 +1,8 @@
 package problem
 
-func AddTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+import "leetcode/common"
+
+func AddTwoNumbers(l1 *common.ListNode, l2 *common.ListNode) *common.ListNode {
 	// We'll use l1 to write the results in, so we need to store the head
 	carry, head := 0, l1
 	for {
@@ -28,7 +30,7 @@ func AddTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	for carry != 0 {
 		// If there is a carry and l1.Next is null, add another node to the list
 		if l1.Next == nil {
-			l1.Next = &ListNode{0, nil}
+			l1.Next = &common.ListNode{0, nil}
 		}
 
 		// Same as the first loop, just using one list and the carry

@@ -1,55 +1,52 @@
 package problem
 
 import (
+	"leetcode/common"
 	"testing"
 )
 
 func TestMergeTwoLists(t *testing.T) {
-	list1 := &ListNode{1, &ListNode{2, &ListNode{Val: 4}}}
-	list2 := &ListNode{1, &ListNode{3, &ListNode{Val: 4}}}
-	got := mergeTwoLists(list1, list2)
-	want := &ListNode{1, &ListNode{1, &ListNode{2, &ListNode{3, &ListNode{4, &ListNode{Val: 4}}}}}}
-
-	for {
-		if got.Val != want.Val {
-			t.Errorf("got %+v want %+v", got.Val, want.Val)
-		}
-
-		// As soon as either of the  runs out we're done with this loop
-		if got.Next == nil {
-			break
-		} else if want.Next == nil {
-			list1.Next = list2.Next
-			break
-		}
-
-		// Advance!
-		got = got.Next
-		want = want.Next
+	cases := []struct {
+		Name   string
+		Given1 *common.ListNode
+		Given2 *common.ListNode
+		Expect *common.ListNode
+	}{
+		{
+			"Test with lists",
+			&common.ListNode{Val: 1, Next: &common.ListNode{Val: 2, Next: &common.ListNode{Val: 4}}},
+			&common.ListNode{Val: 1, Next: &common.ListNode{Val: 3, Next: &common.ListNode{Val: 4}}},
+			&common.ListNode{Val: 1, Next: &common.ListNode{Val: 1, Next: &common.ListNode{Val: 2, Next: &common.ListNode{Val: 3, Next: &common.ListNode{Val: 4, Next: &common.ListNode{Val: 4}}}}}},
+		},
+		{
+			"Test with empty lists",
+			&common.ListNode{},
+			&common.ListNode{},
+			&common.ListNode{},
+		},
 	}
-}
 
-func TestMergeTwoListsEmpty(t *testing.T) {
-	list1 := &ListNode{}
-	list2 := &ListNode{}
-	got := mergeTwoLists(list1, list2)
-	want := &ListNode{}
+	for _, test := range cases {
+		t.Run(test.Name, func(t *testing.T) {
+			got := mergeTwoLists(test.Given1, test.Given2)
 
-	for {
-		// As soon as either of the  runs out we're done with this loop
-		if got.Next == nil {
-			break
-		} else if want.Next == nil {
-			list1.Next = list2.Next
-			break
-		}
+			for {
+				if got.Val != test.Expect.Val {
+					t.Errorf("got %+v want %+v", got.Val, test.Expect.Val)
+				}
 
-		if got.Val != want.Val {
-			t.Errorf("got %+v want %+v", got.Val, want.Val)
-		}
+				// As soon as either of the  runs out we're done with this loop
+				if got.Next == nil {
+					break
+				} else if test.Expect.Next == nil {
+					test.Given1.Next = test.Given2.Next
+					break
+				}
 
-		// Advance!
-		got = got.Next
-		want = want.Next
+				got = got.Next
+				test.Expect = test.Expect.Next
+			}
+		})
 	}
+
 }

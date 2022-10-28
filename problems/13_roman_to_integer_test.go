@@ -2,29 +2,36 @@ package problem
 
 import "testing"
 
-func TestRomanToInt3(t *testing.T) {
-	got := RomanToInt("III")
-	want := 3
-
-	if got != want {
-		t.Errorf("got %d want %d given, %q", got, want, "III")
+func TestRomanToInt(t *testing.T) {
+	cases := []struct {
+		Name   string
+		Given  string
+		Expect int
+	}{
+		{
+			"Test with III",
+			"III",
+			3,
+		},
+		{
+			"Test with LVIII",
+			"LVIII",
+			58,
+		},
+		{
+			"Test with MCMXCIV",
+			"MCMXCIV",
+			1994,
+		},
 	}
-}
 
-func TestRomanToInt58(t *testing.T) {
-	got := RomanToInt("LVIII")
-	want := 58
+	for _, test := range cases {
+		t.Run(test.Name, func(t *testing.T) {
+			got := RomanToInt(test.Given)
 
-	if got != want {
-		t.Errorf("got %d want %d given, %q", got, want, "LVIII")
-	}
-}
-
-func TestRomanToInt1994(t *testing.T) {
-	got := RomanToInt("MCMXCIV")
-	want := 1994
-
-	if got != want {
-		t.Errorf("got %d want %d given, %q", got, want, "MCMXCIV")
+			if got != test.Expect {
+				t.Errorf("got %v want %v", got, test.Expect)
+			}
+		})
 	}
 }

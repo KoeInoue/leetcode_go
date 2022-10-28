@@ -4,29 +4,36 @@ import (
 	"testing"
 )
 
-func TestLongestCommonPrefixFl(t *testing.T) {
-	got := longestCommonPrefix([]string{"flower", "flow", "flight"})
-	want := "fl"
-
-	if got != want {
-		t.Errorf("got %v want %v", got, want)
+func TestLongestCommonPrefix(t *testing.T) {
+	cases := []struct {
+		Name   string
+		Given  []string
+		Expect string
+	}{
+		{
+			"Test with FL",
+			[]string{"flower", "flow", "flight"},
+			"fl",
+		},
+		{
+			"Test with None",
+			[]string{"dog", "racecar", "car"},
+			"",
+		},
+		{
+			"Test with C",
+			[]string{"cir", "car"},
+			"c",
+		},
 	}
-}
 
-func TestLongestCommonPrefixNone(t *testing.T) {
-	got := longestCommonPrefix([]string{"dog", "racecar", "car"})
-	want := ""
+	for _, test := range cases {
+		t.Run(test.Name, func(t *testing.T) {
+			got := longestCommonPrefix(test.Given)
 
-	if got != want {
-		t.Errorf("got %v want %v", got, want)
-	}
-}
-
-func TestLongestCommonPrefixC(t *testing.T) {
-	got := longestCommonPrefix([]string{"cir", "car"})
-	want := "c"
-
-	if got != want {
-		t.Errorf("got %v want %v", got, want)
+			if got != test.Expect {
+				t.Errorf("got %v want %v", got, test.Expect)
+			}
+		})
 	}
 }
