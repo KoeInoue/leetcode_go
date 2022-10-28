@@ -1,6 +1,8 @@
 package problem
 
-func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
+import "leetcode/common"
+
+func mergeTwoLists(l1 *common.ListNode, l2 *common.ListNode) *common.ListNode {
 	if l1 == nil && l2 != nil {
 		return l2
 	}
@@ -10,7 +12,7 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 	if l1 == nil && l2 == nil {
 		return nil
 	}
-	newNode := new(ListNode)
+	newNode := new(common.ListNode)
 	if l1.Val >= l2.Val {
 		newNode.Val = l2.Val
 		l2 = l2.Next

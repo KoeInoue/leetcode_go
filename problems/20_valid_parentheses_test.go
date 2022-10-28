@@ -4,62 +4,51 @@ import (
 	"testing"
 )
 
-func TestIsValidParentheses(t *testing.T) {
-	given := "()"
-	got := isValid(given)
-	want := true
-
-	if got != want {
-		t.Errorf("got %v want %v given %v", got, want, given)
+func TestIsValid(t *testing.T) {
+	cases := []struct {
+		Name   string
+		Given  string
+		Expect bool
+	}{
+		{
+			"Test with '()'",
+			"()",
+			true,
+		},
+		{
+			"Test with ()[]{}",
+			"()[]{}",
+			true,
+		},
+		{
+			"Test with (]",
+			"(]",
+			false,
+		},
+		{
+			"Test with ([{}])",
+			"([{}])",
+			true,
+		},
+		{
+			"Test with ]",
+			"]",
+			false,
+		},
+		{
+			"Test with (])",
+			"(])",
+			false,
+		},
 	}
-}
 
-func TestIsValidParentheses3(t *testing.T) {
-	given := "()[]{}"
-	got := isValid(given)
-	want := true
+	for _, test := range cases {
+		t.Run(test.Name, func(t *testing.T) {
+			got := isValid(test.Given)
 
-	if got != want {
-		t.Errorf("got %v want %v given %v", got, want, given)
-	}
-}
-
-func TestIsValidParentheses2(t *testing.T) {
-	given := "(]"
-	got := isValid(given)
-	want := false
-
-	if got != want {
-		t.Errorf("got %v want %v given %v", got, want, given)
-	}
-}
-
-func TestIsValidParenthesesNest(t *testing.T) {
-	given := "([{}])"
-	got := isValid(given)
-	want := true
-
-	if got != want {
-		t.Errorf("got %v want %v given %v", got, want, given)
-	}
-}
-
-func TestIsValidClose(t *testing.T) {
-	given := "]"
-	got := isValid(given)
-	want := false
-
-	if got != want {
-		t.Errorf("got %v want %v given %v", got, want, given)
-	}
-}
-
-func TestIsValidMixed(t *testing.T) {
-	given := "(])"
-	got := isValid(given)
-	want := false
-
-	if got != want {
-		t.Errorf("got %v want %v given %v", got, want, given)
+			if got != test.Expect {
+				t.Errorf("got %v want %v", got, test.Expect)
+			}
+		})
 	}
 }

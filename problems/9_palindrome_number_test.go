@@ -5,29 +5,35 @@ import (
 )
 
 func TestIsPalindrome(t *testing.T) {
-	got := isPalindrome(121)
-	want := true
-
-	if got != want {
-		t.Errorf("got %v want %v", got, want)
+	cases := []struct {
+		Name   string
+		Given  int
+		Expect bool
+	}{
+		{
+			"Test with 121",
+			121,
+			true,
+		},
+		{
+			"Test with 1000021",
+			1000021,
+			false,
+		},
+		{
+			"Test with 1000021",
+			11,
+			true,
+		},
 	}
 
-}
+	for _, test := range cases {
+		t.Run(test.Name, func(t *testing.T) {
+			got := isPalindrome(test.Given)
 
-func TestIs(t *testing.T) {
-	got := isPalindrome(1000021)
-	want := false
-
-	if got != want {
-		t.Errorf("got %v want %v", got, want)
-	}
-}
-
-func TestIs11(t *testing.T) {
-	got := isPalindrome(11)
-	want := true
-
-	if got != want {
-		t.Errorf("got %v want %v", got, want)
+			if got != test.Expect {
+				t.Errorf("got %v want %v", got, test.Expect)
+			}
+		})
 	}
 }

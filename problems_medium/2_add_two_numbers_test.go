@@ -1,14 +1,15 @@
 package problem
 
 import (
+	"leetcode/common"
 	"testing"
 )
 
 func TestAddTwoNumbers(t *testing.T) {
-	l1 := &ListNode{2, &ListNode{4, &ListNode{Val: 3}}}
-	l2 := &ListNode{5, &ListNode{6, &ListNode{Val: 4}}}
+	l1 := &common.ListNode{2, &common.ListNode{4, &common.ListNode{Val: 3}}}
+	l2 := &common.ListNode{5, &common.ListNode{6, &common.ListNode{Val: 4}}}
 	got := AddTwoNumbers(l1, l2)
-	want := &ListNode{7, &ListNode{0, &ListNode{Val: 8}}}
+	want := &common.ListNode{7, &common.ListNode{0, &common.ListNode{Val: 8}}}
 
 	for {
 		if got.Val != want.Val {
