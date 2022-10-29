@@ -1,6 +1,6 @@
 package problem
 
 // Given function here
-func template() int {
-	return 0
+func template(num int) int {
+	return num + num
 }
